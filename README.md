@@ -1,10 +1,15 @@
 StartupMeu Connect
 A MERN-stack platform connecting startup founders with potential investors.
+
 Built as a technical assessment for the Software Engineer Intern – MERN Stack role at StartupMeu.
+
 Live application: https://startup-meu-technical-assesment.vercel.app/
+
 Source code: https://github.com/shkshhnwz/StartupMeu-Technical-Assesment
+
 Overview
 StartupMeu Connect provides a marketplace where founders can publish fundraising opportunities and investors can discover businesses and express interest. Separate founder and investor dashboards help each role manage its activity.
+
 Features
 1. Authentication and role-based access
 - Founder and investor registration and login
