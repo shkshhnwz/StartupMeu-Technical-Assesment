@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { AuthProvider } from './features/auth/context/AuthContext';
 import { Navbar } from './components/Navbar';
 import { HomePage } from './pages/HomePage';
@@ -7,6 +7,8 @@ import { LoginPage } from './features/auth/pages/LoginPage';
 import { RegisterPage } from './features/auth/pages/RegisterPage';
 import { FounderDashboard } from './pages/FounderDashboard';
 import { InvestorDashboard } from './pages/InvestorDashboard';
+import { NewListingPage } from './features/listings/pages/NewListingPage';
+import { EditListingPage } from './features/listings/pages/EditListingPage';
 import { UnauthorizedPage } from './pages/UnauthorizedPage';
 import { NotFoundPage } from './pages/NotFoundPage';
 import { ProtectedRoute } from './features/auth/components/ProtectedRoute';
@@ -31,6 +33,22 @@ function App() {
                 element={
                   <ProtectedRoute allowedRoles={['founder']}>
                     <FounderDashboard />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="/founder/listings/new"
+                element={
+                  <ProtectedRoute allowedRoles={['founder']}>
+                    <NewListingPage />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="/founder/listings/:id/edit"
+                element={
+                  <ProtectedRoute allowedRoles={['founder']}>
+                    <EditListingPage />
                   </ProtectedRoute>
                 }
               />
