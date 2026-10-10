@@ -14,6 +14,9 @@ const { sendSuccess, sendError } = require('./utils/apiResponse');
 
 const app = express();
 
+// Trust reverse proxies (Render, Railway, Heroku, Vercel) for secure cookies
+app.set('trust proxy', 1);
+
 // Security middlewares
 app.use(helmet());
 
