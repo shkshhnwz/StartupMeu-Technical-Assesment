@@ -23,7 +23,7 @@ const protect = async (req, res, next) => {
     }
 
     // Verify JWT
-    const decoded = jwt.verify(token, process.env.JWT_SECRET || 'super_secret_jwt_key_startupmeu_dev');
+    const decoded = jwt.verify(token, process.env.JWT_SECRET);
 
     // Retrieve active user
     const user = await User.findById(decoded.id);
@@ -77,7 +77,7 @@ const optionalAuth = async (req, res, next) => {
     }
 
     if (token) {
-      const decoded = jwt.verify(token, process.env.JWT_SECRET || 'super_secret_jwt_key_startupmeu_dev');
+      const decoded = jwt.verify(token, process.env.JWT_SECRET);
       const user = await User.findById(decoded.id);
       if (user) {
         req.user = user;
