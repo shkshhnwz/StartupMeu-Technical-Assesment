@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import { useAuth } from '../features/auth/context/AuthContext';
 import { authService } from '../features/auth/services/authService';
-import { TrendingUp, Send, CheckCircle, ShieldCheck, ShieldAlert, Compass } from 'lucide-react';
+import { TrendingUp, Send, CheckCircle, ShieldCheck, ShieldAlert, Compass, ArrowRight } from 'lucide-react';
 
 export const InvestorDashboard = () => {
   const { user } = useAuth();
@@ -154,8 +155,11 @@ export const InvestorDashboard = () => {
           <Compass size={44} color="#A3A3A3" />
           <h3>No active interest requests submitted yet</h3>
           <p>
-            You are ready for the next feature: <strong>Opportunity Discovery & Investor Interest Workflow</strong>. You will be able to search published startups and express interest directly.
+            Explore live ventures on the marketplace, discover business opportunities, and express investment interest.
           </p>
+          <Link to="/opportunities" className="btn-hero-primary" style={{ marginTop: '0.75rem', textDecoration: 'none' }}>
+            Browse Opportunities <ArrowRight size={16} />
+          </Link>
         </div>
       </div>
     </div>

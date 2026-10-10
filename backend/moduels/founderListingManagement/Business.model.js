@@ -119,9 +119,11 @@ const businessSchema = new mongoose.Schema(
   }
 );
 
-// Compound indexes for efficient querying
+// Compound indexes for efficient querying & discovery
 businessSchema.index({ status: 1, deletedAt: 1, createdAt: -1 });
+businessSchema.index({ status: 1, deletedAt: 1, industry: 1, stage: 1 });
 businessSchema.index({ owner: 1, deletedAt: 1, createdAt: -1 });
+businessSchema.index({ businessName: 'text', tagline: 'text', description: 'text' });
 
 const Business = mongoose.model('Business', businessSchema);
 

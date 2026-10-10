@@ -6,6 +6,7 @@ const cookieParser = require('cookie-parser');
 const errorHandler = require('./middleware/errorHandler');
 const { authRoutes } = require('./moduels/Authorization');
 const { businessRoutes } = require('./moduels/founderListingManagement');
+const { discoveryRoutes } = require('./moduels/OpportunityDiscovery');
 const { sendSuccess, sendError } = require('./utils/apiResponse');
 
 const app = express();
@@ -44,7 +45,6 @@ app.use(express.json({ limit: '10mb' }));
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser(process.env.COOKIE_SECRET));
 
-// Health check endpoint
 app.get('/api/health', (req, res) => {
   return sendSuccess(res, 200, 'StartupMeu Connect API is healthy', {
     timestamp: new Date().toISOString(),
@@ -52,16 +52,14 @@ app.get('/api/health', (req, res) => {
   });
 });
 
-// Feature routes
 app.use('/api/auth', authRoutes);
 app.use('/api/businesses', businessRoutes);
+app.use('/api/opportunities', discoveryRoutes);
 
-// 404 handler for undefined API routes
 app.use('*', (req, res) => {
   return sendError(res, 404, 'NOT_FOUND', `Route ${req.originalUrl} not found`);
 });
 
-// Centralized error handling
 app.use(errorHandler);
 
 module.exports = app;
