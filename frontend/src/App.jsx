@@ -9,6 +9,8 @@ import { FounderDashboard } from './pages/FounderDashboard';
 import { InvestorDashboard } from './pages/InvestorDashboard';
 import { NewListingPage } from './features/listings/pages/NewListingPage';
 import { EditListingPage } from './features/listings/pages/EditListingPage';
+import { OpportunitiesPage } from './features/discovery/pages/OpportunitiesPage';
+import { OpportunityDetailPage } from './features/discovery/pages/OpportunityDetailPage';
 import { UnauthorizedPage } from './pages/UnauthorizedPage';
 import { NotFoundPage } from './pages/NotFoundPage';
 import { ProtectedRoute } from './features/auth/components/ProtectedRoute';
@@ -23,6 +25,8 @@ function App() {
             <Routes>
               {/* Public Routes */}
               <Route path="/" element={<HomePage />} />
+              <Route path="/opportunities" element={<OpportunitiesPage />} />
+              <Route path="/opportunities/:id" element={<OpportunityDetailPage />} />
               <Route path="/login" element={<LoginPage />} />
               <Route path="/register" element={<RegisterPage />} />
               <Route path="/unauthorized" element={<UnauthorizedPage />} />
