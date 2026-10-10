@@ -64,7 +64,33 @@ const authorizeRoles = (...roles) => {
   };
 };
 
+/**
+ * Optional Auth middleware: Populates req.user if token is present and valid, but doesn't block unauthenticated requests
+ */
+const optionalAuth = async (req, res, next) => {
+  try {
+    let token;
+    if (req.cookies && req.cookies.token) {
+      token = req.cookies.token;
+    } else if (req.headers.authorization && req.headers.authorization.startsWith('Bearer ')) {
+      token = req.headers.authorization.split(' ')[1];
+    }
+
+    if (token) {
+      const decoded = jwt.verify(token, process.env.JWT_SECRET || 'super_secret_jwt_key_startupmeu_dev');
+      const user = await User.findById(decoded.id);
+      if (user) {
+        req.user = user;
+      }
+    }
+  } catch (_) {
+    // Silently continue for public requests
+  }
+  next();
+};
+
 module.exports = {
   protect,
-  authorizeRoles
+  authorizeRoles,
+  optionalAuth
 };

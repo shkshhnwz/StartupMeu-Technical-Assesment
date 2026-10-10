@@ -1,10 +1,11 @@
 const authRoutes = require('./auth.routes');
 const User = require('./User.model');
-const { protect, authorizeRoles } = require('./auth.middleware');
+const { protect, authorizeRoles, optionalAuth } = require('./auth.middleware');
 
 module.exports = {
   authRoutes,
   User,
   protect,
-  authorizeRoles
+  authorizeRoles,
+  optionalAuth
 };

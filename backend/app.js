@@ -5,6 +5,7 @@ const morgan = require('morgan');
 const cookieParser = require('cookie-parser');
 const errorHandler = require('./middleware/errorHandler');
 const { authRoutes } = require('./moduels/Authorization');
+const { businessRoutes } = require('./moduels/founderListingManagement');
 const { sendSuccess, sendError } = require('./utils/apiResponse');
 
 const app = express();
@@ -53,6 +54,7 @@ app.get('/api/health', (req, res) => {
 
 // Feature routes
 app.use('/api/auth', authRoutes);
+app.use('/api/businesses', businessRoutes);
 
 // 404 handler for undefined API routes
 app.use('*', (req, res) => {
