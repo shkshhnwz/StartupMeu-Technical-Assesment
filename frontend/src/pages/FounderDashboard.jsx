@@ -139,7 +139,6 @@ export const FounderDashboard = () => {
   return (
     <div className="dashboard-page">
       <div className="dashboard-container">
-        {/* Welcome Header Card */}
         <div className="dashboard-hero-card">
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '1rem' }}>
             <div>
@@ -158,7 +157,6 @@ export const FounderDashboard = () => {
           </div>
         </div>
 
-        {/* Dynamic Metrics Row */}
         <div className="metrics-row">
           <div className="metric-box">
             <div className="metric-icon-bubble">
@@ -191,7 +189,6 @@ export const FounderDashboard = () => {
           </div>
         </div>
 
-        {/* Inbound Investor Interest Workflow Section */}
         <div style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
             <div>
@@ -259,7 +256,6 @@ export const FounderDashboard = () => {
                         </div>
                       </div>
 
-                      {/* Status Badges or Action Buttons */}
                       <div>
                         {isPending ? (
                           <div style={{ display: 'flex', gap: '0.65rem' }}>
@@ -323,7 +319,6 @@ export const FounderDashboard = () => {
                       </div>
                     </div>
 
-                    {/* Investor's Note */}
                     {interest.message ? (
                       <div
                         style={{
@@ -376,7 +371,6 @@ export const FounderDashboard = () => {
           )}
         </div>
 
-        {/* Listings Section */}
         <div style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem', marginTop: '1rem' }}>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
             <h3 style={{ fontSize: '1.4rem', fontWeight: 800 }}>Your Business Opportunities</h3>
@@ -484,7 +478,6 @@ export const FounderDashboard = () => {
           )}
         </div>
 
-        {/* Live Role-Based Authorization Verification Panel */}
         <div className="role-test-box">
           <div className="role-test-header-group">
             <ShieldCheck size={26} color="#00A35C" />

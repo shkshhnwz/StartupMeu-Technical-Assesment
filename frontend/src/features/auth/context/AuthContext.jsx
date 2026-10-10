@@ -8,7 +8,6 @@ export const AuthProvider = ({ children }) => {
   const [loading, setLoading] = useState(true);
   const [authError, setAuthError] = useState(null);
 
-  // Check existing session on application launch or page refresh
   useEffect(() => {
     let isMounted = true;
 
@@ -19,7 +18,6 @@ export const AuthProvider = ({ children }) => {
           setUser(currentUser);
         }
       } catch (err) {
-        // Not logged in or expired token - safe to clear
         if (isMounted) {
           setUser(null);
         }

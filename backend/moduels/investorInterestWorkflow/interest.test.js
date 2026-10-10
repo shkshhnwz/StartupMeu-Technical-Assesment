@@ -20,7 +20,6 @@ beforeAll(async () => {
   const uri = mongoServer.getUri();
   await mongoose.connect(uri);
 
-  // 1. Founder One
   const f1Res = await request(app)
     .post('/api/auth/register')
     .send({
@@ -32,7 +31,6 @@ beforeAll(async () => {
   founderOneCookie = f1Res.headers['set-cookie'];
   founderOneUser = f1Res.body.data.user;
 
-  // 2. Founder Two
   const f2Res = await request(app)
     .post('/api/auth/register')
     .send({
@@ -43,7 +41,6 @@ beforeAll(async () => {
     });
   founderTwoCookie = f2Res.headers['set-cookie'];
 
-  // 3. Investor One
   const inv1Res = await request(app)
     .post('/api/auth/register')
     .send({
@@ -54,7 +51,6 @@ beforeAll(async () => {
     });
   investorOneCookie = inv1Res.headers['set-cookie'];
 
-  // 4. Investor Two
   const inv2Res = await request(app)
     .post('/api/auth/register')
     .send({
@@ -75,7 +71,6 @@ beforeEach(async () => {
   await Business.deleteMany({});
   await Interest.deleteMany({});
 
-  // Seed sample businesses owned by founderOne
   publishedBusiness = await Business.create({
     owner: founderOneUser._id,
     businessName: 'FinNova Technologies',
@@ -124,7 +119,6 @@ describe('Feature 4: Investor Interest Workflow API', () => {
     });
 
     it('rejects duplicate interest submissions from the same investor (409 Conflict)', async () => {
-      // First submission
       await request(app)
         .post('/api/interests')
         .set('Cookie', investorOneCookie)
@@ -133,7 +127,6 @@ describe('Feature 4: Investor Interest Workflow API', () => {
           message: 'Initial pitch message'
         });
 
-      // Second duplicate submission
       const res = await request(app)
         .post('/api/interests')
         .set('Cookie', investorOneCookie)
@@ -231,13 +224,11 @@ describe('Feature 4: Investor Interest Workflow API', () => {
 
   describe('GET /api/interests/sent (Investor Sent Interests)', () => {
     it('returns only the sent interests for the authenticated investor', async () => {
-      // Investor One submits
       await request(app)
         .post('/api/interests')
         .set('Cookie', investorOneCookie)
         .send({ businessId: publishedBusiness._id, message: 'From investor one' });
 
-      // Investor Two submits
       await request(app)
         .post('/api/interests')
         .set('Cookie', investorTwoCookie)
@@ -276,13 +267,11 @@ describe('Feature 4: Investor Interest Workflow API', () => {
 
       const interestId = submitRes.body.data.interest._id;
 
-      // Founder accepts
       await request(app)
         .patch(`/api/interests/${interestId}/status`)
         .set('Cookie', founderOneCookie)
         .send({ status: 'accepted' });
 
-      // Investor checks sent
       const res = await request(app)
         .get('/api/interests/sent')
         .set('Cookie', investorOneCookie);
@@ -372,13 +361,11 @@ describe('Feature 4: Investor Interest Workflow API', () => {
     });
 
     it('prevents modifying an interest request that is already accepted or declined (400 INVALID_TRANSITION)', async () => {
-      // First accept
       await request(app)
         .patch(`/api/interests/${interestId}/status`)
         .set('Cookie', founderOneCookie)
         .send({ status: 'accepted' });
 
-      // Attempt to decline after acceptance
       const res = await request(app)
         .patch(`/api/interests/${interestId}/status`)
         .set('Cookie', founderOneCookie)

@@ -29,7 +29,6 @@ afterAll(async () => {
 beforeEach(async () => {
   await Business.deleteMany({});
 
-  // Seed sample businesses for testing
   await Business.create([
     {
       owner: founderOne._id,
@@ -77,7 +76,7 @@ beforeEach(async () => {
       location: 'Seattle, US',
       fundingRequired: 250000,
       currency: 'USD',
-      status: 'draft' // Should be excluded from discovery!
+      status: 'draft'
     },
     {
       owner: founderOne._id,
@@ -90,7 +89,7 @@ beforeEach(async () => {
       fundingRequired: 400000,
       currency: 'USD',
       status: 'published',
-      deletedAt: new Date() // Should be excluded from discovery!
+      deletedAt: new Date()
     }
   ]);
 });
@@ -102,7 +101,7 @@ describe('Feature 3: Opportunity Discovery', () => {
 
       expect(res.status).toBe(200);
       expect(res.body.success).toBe(true);
-      expect(res.body.data.businesses.length).toBe(3); // 3 published, excluding draft and deleted
+      expect(res.body.data.businesses.length).toBe(3);
 
       const names = res.body.data.businesses.map((b) => b.businessName);
       expect(names).toContain('FinNova Technologies');

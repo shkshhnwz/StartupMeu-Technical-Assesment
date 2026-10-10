@@ -52,7 +52,6 @@ const interestSchema = new mongoose.Schema(
   }
 );
 
-// Compound unique constraint: one expression of interest per investor per listing
 interestSchema.index({ business: 1, investor: 1 }, { unique: true });
 
 const Interest = mongoose.model('Interest', interestSchema);

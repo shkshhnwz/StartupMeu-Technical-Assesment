@@ -4,7 +4,6 @@ const errorHandler = (err, req, res, next) => {
   let message = err.message || 'An unexpected error occurred';
   let fields = err.fields || {};
 
-  // Handle Mongoose duplicate key error (e.g. duplicate email)
   if (err.code === 11000) {
     statusCode = 409;
     code = 'CONFLICT';
@@ -13,7 +12,6 @@ const errorHandler = (err, req, res, next) => {
     fields[field] = `${field} is already in use`;
   }
 
-  // Handle Mongoose validation errors
   if (err.name === 'ValidationError') {
     statusCode = 400;
     code = 'VALIDATION_ERROR';
@@ -24,14 +22,12 @@ const errorHandler = (err, req, res, next) => {
     }
   }
 
-  // Handle Mongoose invalid ObjectId CastError
   if (err.name === 'CastError') {
     statusCode = 400;
     code = 'INVALID_ID';
     message = `Invalid format for resource identifier: ${err.value}`;
   }
 
-  // Handle JWT errors
   if (err.name === 'JsonWebTokenError') {
     statusCode = 401;
     code = 'UNAUTHORIZED';

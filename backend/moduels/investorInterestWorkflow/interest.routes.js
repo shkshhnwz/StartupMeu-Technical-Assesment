@@ -16,7 +16,6 @@ const {
 
 const router = express.Router();
 
-// Investor routes
 router.post(
   '/',
   protect,
@@ -32,7 +31,6 @@ router.get(
   getSentInterests
 );
 
-// Founder routes
 router.get(
   '/received',
   protect,

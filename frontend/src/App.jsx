@@ -24,7 +24,6 @@ function App() {
           <Navbar />
           <main className="main-content">
             <Routes>
-              {/* Public Routes */}
               <Route path="/" element={<HomePage />} />
               <Route path="/opportunities" element={<OpportunitiesPage />} />
               <Route path="/opportunities/:id" element={<OpportunityDetailPage />} />
@@ -32,7 +31,6 @@ function App() {
               <Route path="/register" element={<RegisterPage />} />
               <Route path="/unauthorized" element={<UnauthorizedPage />} />
 
-              {/* Founder Role-Protected Routes */}
               <Route
                 path="/founder/dashboard"
                 element={
@@ -66,7 +64,6 @@ function App() {
                 }
               />
 
-              {/* Investor Role-Protected Routes */}
               <Route
                 path="/investor/dashboard"
                 element={
@@ -76,7 +73,6 @@ function App() {
                 }
               />
 
-              {/* Catch-all 404 Route */}
               <Route path="*" element={<NotFoundPage />} />
             </Routes>
           </main>

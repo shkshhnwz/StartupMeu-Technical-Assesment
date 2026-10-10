@@ -29,7 +29,6 @@ beforeAll(async () => {
   const uri = mongoServer.getUri();
   await mongoose.connect(uri);
 
-  // 1. Create Founder One
   const f1 = await request(app)
     .post('/api/auth/register')
     .send({
@@ -40,7 +39,6 @@ beforeAll(async () => {
     });
   founderOneCookie = f1.headers['set-cookie'];
 
-  // 2. Create Founder Two
   const f2 = await request(app)
     .post('/api/auth/register')
     .send({
@@ -51,7 +49,6 @@ beforeAll(async () => {
     });
   founderTwoCookie = f2.headers['set-cookie'];
 
-  // 3. Create Investor
   const inv = await request(app)
     .post('/api/auth/register')
     .send({
@@ -128,13 +125,13 @@ describe('Feature 2: Founder Listing Management', () => {
         .post('/api/businesses')
         .set('Cookie', founderOneCookie)
         .send({
-          businessName: 'A', // Too short
-          tagline: '', // Required
-          description: 'Too short description', // < 50 chars
-          industry: 'SpaceTravel', // Disallowed industry
+          businessName: 'A',
+          tagline: '',
+          description: 'Too short description',
+          industry: 'SpaceTravel',
           stage: 'UnknownStage',
           location: '',
-          fundingRequired: -5000 // Negative number
+          fundingRequired: -5000
         });
 
       expect(res.status).toBe(400);
@@ -149,7 +146,6 @@ describe('Feature 2: Founder Listing Management', () => {
 
   describe('GET /api/businesses/mine (Founder Own Listings)', () => {
     it('should retrieve all listings owned by founder, including drafts', async () => {
-      // Create one published and one draft
       await request(app)
         .post('/api/businesses')
         .set('Cookie', founderOneCookie)
@@ -174,13 +170,11 @@ describe('Feature 2: Founder Listing Management', () => {
     });
 
     it('should not expose other founders listings in /mine', async () => {
-      // Founder One creates listing
       await request(app)
         .post('/api/businesses')
         .set('Cookie', founderOneCookie)
         .send(sampleListing);
 
-      // Founder Two queries /mine
       const res = await request(app)
         .get('/api/businesses/mine')
         .set('Cookie', founderTwoCookie);
@@ -327,14 +321,12 @@ describe('Feature 2: Founder Listing Management', () => {
       expect(res.status).toBe(200);
       expect(res.body.success).toBe(true);
 
-      // Verify listing no longer appears in /mine
       const mineRes = await request(app)
         .get('/api/businesses/mine')
         .set('Cookie', founderOneCookie);
 
       expect(mineRes.body.data.businesses.length).toBe(0);
 
-      // Verify listing returns 404
       const getRes = await request(app).get(`/api/businesses/${businessId}`);
       expect(getRes.status).toBe(404);
     });

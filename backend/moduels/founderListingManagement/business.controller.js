@@ -1,16 +1,11 @@
 const Business = require('./Business.model');
 const { sendSuccess, sendError } = require('../../utils/apiResponse');
 
-/**
- * @desc    Create a new business listing (draft or published)
- * @route   POST /api/businesses
- * @access  Founder only
- */
 const createListing = async (req, res, next) => {
   try {
     const listingData = {
       ...req.body,
-      owner: req.user._id // Server-assigned authenticated founder ID
+      owner: req.user._id
     };
 
     const business = await Business.create(listingData);
@@ -23,11 +18,6 @@ const createListing = async (req, res, next) => {
   }
 };
 
-/**
- * @desc    Get all listings owned by the logged-in founder (including drafts)
- * @route   GET /api/businesses/mine
- * @access  Founder only
- */
 const getMine = async (req, res, next) => {
   try {
     const businesses = await Business.find({
@@ -44,11 +34,6 @@ const getMine = async (req, res, next) => {
   }
 };
 
-/**
- * @desc    Get listing details by ID
- * @route   GET /api/businesses/:id
- * @access  Public for published listings / Owner only for drafts
- */
 const getListingById = async (req, res, next) => {
   try {
     const business = await Business.findOne({
@@ -60,7 +45,6 @@ const getListingById = async (req, res, next) => {
       return sendError(res, 404, 'NOT_FOUND', 'Listing not found or has been removed');
     }
 
-    // If listing is a draft, only the owning founder can view it
     if (business.status === 'draft') {
       const isOwner = req.user && business.owner._id.toString() === req.user._id.toString();
       if (!isOwner) {
@@ -76,11 +60,6 @@ const getListingById = async (req, res, next) => {
   }
 };
 
-/**
- * @desc    Update an existing listing owned by founder
- * @route   PATCH /api/businesses/:id
- * @access  Owner Founder only
- */
 const updateListing = async (req, res, next) => {
   try {
     const business = await Business.findOne({
@@ -92,7 +71,6 @@ const updateListing = async (req, res, next) => {
       return sendError(res, 404, 'NOT_FOUND', 'Listing not found or has been removed');
     }
 
-    // Ownership check
     if (business.owner.toString() !== req.user._id.toString()) {
       return sendError(
         res,
@@ -102,7 +80,6 @@ const updateListing = async (req, res, next) => {
       );
     }
 
-    // Apply validated updates
     Object.assign(business, req.body);
     await business.save();
 
@@ -114,11 +91,6 @@ const updateListing = async (req, res, next) => {
   }
 };
 
-/**
- * @desc    Soft-delete a listing owned by founder
- * @route   DELETE /api/businesses/:id
- * @access  Owner Founder only
- */
 const deleteListing = async (req, res, next) => {
   try {
     const business = await Business.findOne({
@@ -130,7 +102,6 @@ const deleteListing = async (req, res, next) => {
       return sendError(res, 404, 'NOT_FOUND', 'Listing not found or already deleted');
     }
 
-    // Ownership check
     if (business.owner.toString() !== req.user._id.toString()) {
       return sendError(
         res,
@@ -140,7 +111,6 @@ const deleteListing = async (req, res, next) => {
       );
     }
 
-    // Soft delete
     business.deletedAt = new Date();
     await business.save();
 

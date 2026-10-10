@@ -24,7 +24,6 @@ export const Navbar = () => {
   return (
     <nav className="navbar">
       <div className="navbar-container">
-        {/* Brand Logo (Bonsai style mark) */}
         <Link to="/" className="navbar-brand" onClick={closeMobileMenu}>
           <svg
             className="brand-icon"
@@ -44,7 +43,6 @@ export const Navbar = () => {
           </div>
         </Link>
 
-        {/* Center Links (Desktop only) */}
         <div className="navbar-center-links">
           <Link to="/" className={`nav-link ${isActive('/') ? 'nav-link-active' : ''}`}>
             Home
@@ -65,7 +63,6 @@ export const Navbar = () => {
           )}
         </div>
 
-        {/* Right Action Area (Desktop) */}
         <div className="navbar-right">
           {isAuthenticated ? (
             <div className="user-profile-menu">
@@ -116,7 +113,6 @@ export const Navbar = () => {
           )}
         </div>
 
-        {/* Mobile Hamburger Button */}
         <button
           className="mobile-hamburger-btn"
           onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
@@ -127,7 +123,6 @@ export const Navbar = () => {
         </button>
       </div>
 
-      {/* Mobile Drawer Navigation */}
       {mobileMenuOpen && (
         <div className="mobile-drawer-overlay" onClick={closeMobileMenu}>
           <div className="mobile-drawer-content" onClick={(e) => e.stopPropagation()}>

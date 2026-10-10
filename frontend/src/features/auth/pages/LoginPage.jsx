@@ -89,7 +89,6 @@ export const LoginPage = () => {
           <p className="auth-subtitle">Sign in to your StartupMeu Connect account</p>
         </div>
 
-        {/* Demo Fast-Fill Section */}
         <div className="demo-pill-section">
           <p className="demo-pill-title">Quick Demo Login (1-Click Fill):</p>
           <div className="demo-pill-buttons">

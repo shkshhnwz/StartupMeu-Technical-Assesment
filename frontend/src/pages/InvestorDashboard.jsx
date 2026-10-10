@@ -93,7 +93,6 @@ export const InvestorDashboard = () => {
   return (
     <div className="dashboard-page">
       <div className="dashboard-container">
-        {/* Welcome Header Card */}
         <div className="dashboard-hero-card">
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '1rem' }}>
             <div>
@@ -112,7 +111,6 @@ export const InvestorDashboard = () => {
           </div>
         </div>
 
-        {/* Dynamic Metrics Row */}
         <div className="metrics-row">
           <div className="metric-box">
             <div className="metric-icon-bubble">
@@ -145,7 +143,6 @@ export const InvestorDashboard = () => {
           </div>
         </div>
 
-        {/* Sent Interests Feed Section */}
         <div style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
             <h3 style={{ fontSize: '1.4rem', fontWeight: 800 }}>Submitted Interest Pipeline</h3>
@@ -197,7 +194,6 @@ export const InvestorDashboard = () => {
                           <h4 style={{ fontSize: '1.25rem', fontWeight: 800 }}>
                             {biz?.businessName || 'Business Opportunity'}
                           </h4>
-                          {/* Status Badge */}
                           {isAccepted ? (
                             <span
                               className="role-badge"
@@ -256,7 +252,6 @@ export const InvestorDashboard = () => {
                       )}
                     </div>
 
-                    {/* Pitch message sent */}
                     {item.message && (
                       <div
                         style={{
@@ -276,7 +271,6 @@ export const InvestorDashboard = () => {
                       </div>
                     )}
 
-                    {/* Unlocked Contact Box when Accepted */}
                     {isAccepted && biz?.owner && (
                       <div
                         style={{
@@ -319,7 +313,6 @@ export const InvestorDashboard = () => {
                       </div>
                     )}
 
-                    {/* Metadata footer */}
                     <div
                       style={{
                         display: 'flex',
@@ -353,7 +346,6 @@ export const InvestorDashboard = () => {
           )}
         </div>
 
-        {/* Live Role-Based Authorization Verification Panel */}
         <div className="role-test-box">
           <div className="role-test-header-group">
             <ShieldCheck size={26} color="#00A35C" />

@@ -28,7 +28,6 @@ const validateRegister = (req, res, next) => {
     return sendError(res, 400, 'VALIDATION_ERROR', 'Please check your inputs', fields);
   }
 
-  // Normalize trimmed values
   req.body.name = name.trim();
   req.body.email = email.trim().toLowerCase();
   next();

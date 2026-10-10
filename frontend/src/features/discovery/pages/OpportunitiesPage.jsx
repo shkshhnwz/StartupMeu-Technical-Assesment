@@ -22,7 +22,6 @@ const STAGES = ['All', 'Idea', 'Early Revenue', 'Growth', 'Established'];
 export const OpportunitiesPage = () => {
   const [searchParams, setSearchParams] = useSearchParams();
 
-  // URL Query Parameters state
   const search = searchParams.get('search') || '';
   const industry = searchParams.get('industry') || 'All';
   const stage = searchParams.get('stage') || 'All';
@@ -45,13 +44,11 @@ export const OpportunitiesPage = () => {
   const [searchInput, setSearchInput] = useState(search);
   const [locationInput, setLocationInput] = useState(location);
 
-  // Sync inputs if URL params change externally
   useEffect(() => {
     setSearchInput(search);
     setLocationInput(location);
   }, [search, location]);
 
-  // Fetch opportunities when query parameters change
   useEffect(() => {
     let isMounted = true;
     const fetchListings = async () => {
@@ -89,12 +86,10 @@ export const OpportunitiesPage = () => {
     };
   }, [search, industry, stage, location, minFunding, maxFunding, sort, page]);
 
-  // Update query params helper
   const updateParam = (newParams) => {
     const current = Object.fromEntries(searchParams.entries());
     const merged = { ...current, ...newParams };
 
-    // Clean up empty or default values
     Object.keys(merged).forEach((key) => {
       if (!merged[key] || merged[key] === 'All' || (key === 'page' && merged[key] === 1)) {
         delete merged[key];
@@ -132,7 +127,6 @@ export const OpportunitiesPage = () => {
 
   return (
     <div className="home-page" style={{ paddingBottom: '5rem' }}>
-      {/* Header Banner */}
       <section className="section-container" style={{ paddingTop: '3.5rem', paddingBottom: '2rem' }}>
         <div style={{ maxWidth: '720px', marginBottom: '2.5rem' }}>
           <p className="section-pretitle">Explore Verified Startups</p>
@@ -144,10 +138,8 @@ export const OpportunitiesPage = () => {
           </p>
         </div>
 
-        {/* Search & Filter Controls Bar */}
         <div className="auth-card" style={{ maxWidth: '100%', padding: '1.75rem', marginBottom: '2.5rem' }}>
           <form onSubmit={handleSearchSubmit}>
-            {/* Top Row: Keyword Search & Location */}
             <div className="form-row" style={{ marginBottom: '1rem' }}>
               <div className="form-group">
                 <label htmlFor="search-input">Search Keywords</label>
@@ -178,7 +170,6 @@ export const OpportunitiesPage = () => {
               </div>
             </div>
 
-            {/* Filter Dropdowns Row */}
             <div
               style={{
                 display: 'grid',
@@ -274,7 +265,6 @@ export const OpportunitiesPage = () => {
           </form>
         </div>
 
-        {/* Results Count Summary */}
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.5rem' }}>
           <p style={{ fontSize: '0.95rem', color: '#4A4A4A', fontWeight: 600 }}>
             Showing <strong>{businesses.length}</strong> of <strong>{pagination.total || 0}</strong> published opportunities
@@ -286,7 +276,6 @@ export const OpportunitiesPage = () => {
           )}
         </div>
 
-        {/* Listings Grid */}
         {loading ? (
           <div className="loading-wrapper">
             <div className="spinner-clean"></div>
@@ -328,7 +317,6 @@ export const OpportunitiesPage = () => {
                 }}
               >
                 <div>
-                  {/* Badges Header */}
                   <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.85rem' }}>
                     <span className="role-badge badge-founder">{biz.industry}</span>
                     <span className="role-badge badge-investor">{biz.stage}</span>
@@ -387,7 +375,6 @@ export const OpportunitiesPage = () => {
           </div>
         )}
 
-        {/* Pagination Bar */}
         {pagination.totalPages > 1 && (
           <div
             style={{

@@ -24,7 +24,7 @@ const userSchema = new mongoose.Schema(
     passwordHash: {
       type: String,
       required: [true, 'Password is required'],
-      select: false // Excluded by default from queries
+      select: false
     },
     role: {
       type: String,
@@ -54,12 +54,10 @@ const userSchema = new mongoose.Schema(
   }
 );
 
-// Method to verify candidate password against stored hash
 userSchema.methods.comparePassword = async function (candidatePassword) {
   return await bcrypt.compare(candidatePassword, this.passwordHash);
 };
 
-// Static helper to hash passwords
 userSchema.statics.hashPassword = async function (plainPassword) {
   const salt = await bcrypt.genSalt(10);
   return await bcrypt.hash(plainPassword, salt);

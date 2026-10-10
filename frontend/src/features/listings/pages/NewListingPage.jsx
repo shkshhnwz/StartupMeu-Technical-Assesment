@@ -31,7 +31,7 @@ export const NewListingPage = () => {
     fundingRequired: '',
     currency: 'USD',
     website: '',
-    status: 'published' // Default to publish or draft
+    status: 'published'
   });
 
   const [loading, setLoading] = useState(false);
@@ -104,7 +104,6 @@ export const NewListingPage = () => {
   return (
     <div className="dashboard-page">
       <div className="dashboard-container" style={{ maxWidth: '840px' }}>
-        {/* Navigation Breadcrumb */}
         <Link to="/founder/dashboard" className="btn-secondary-pill" style={{ width: 'fit-content' }}>
           <ArrowLeft size={16} /> Back to Dashboard
         </Link>
@@ -124,7 +123,6 @@ export const NewListingPage = () => {
         )}
 
         <form onSubmit={handleSubmit} className="auth-card" style={{ maxWidth: '100%' }} noValidate>
-          {/* Status Selection Pill Toggle */}
           <div className="form-group" style={{ marginBottom: '0.75rem' }}>
             <label>Listing Visibility</label>
             <div className="demo-pill-buttons" style={{ gridTemplateColumns: '1fr 1fr', maxWidth: '380px' }}>
@@ -160,7 +158,6 @@ export const NewListingPage = () => {
             </span>
           </div>
 
-          {/* Business Name */}
           <div className="form-group">
             <label htmlFor="businessName">Business Name</label>
             <div className="input-container">
@@ -179,7 +176,6 @@ export const NewListingPage = () => {
             {fieldErrors.businessName && <span className="field-error-text">{fieldErrors.businessName}</span>}
           </div>
 
-          {/* Tagline */}
           <div className="form-group">
             <div style={{ display: 'flex', justifyContent: 'space-between' }}>
               <label htmlFor="tagline">One-line Tagline</label>
@@ -202,7 +198,6 @@ export const NewListingPage = () => {
             {fieldErrors.tagline && <span className="field-error-text">{fieldErrors.tagline}</span>}
           </div>
 
-          {/* Description */}
           <div className="form-group">
             <div style={{ display: 'flex', justifyContent: 'space-between' }}>
               <label htmlFor="description">Comprehensive Business Description</label>
@@ -231,7 +226,6 @@ export const NewListingPage = () => {
             {fieldErrors.description && <span className="field-error-text">{fieldErrors.description}</span>}
           </div>
 
-          {/* Row: Industry & Stage */}
           <div className="form-row">
             <div className="form-group">
               <label htmlFor="industry">Industry Sector</label>
@@ -284,7 +278,6 @@ export const NewListingPage = () => {
             </div>
           </div>
 
-          {/* Row: Funding Required & Currency */}
           <div className="form-row">
             <div className="form-group">
               <label htmlFor="fundingRequired">Funding Required</label>
@@ -331,7 +324,6 @@ export const NewListingPage = () => {
             </div>
           </div>
 
-          {/* Row: Location & Website */}
           <div className="form-row">
             <div className="form-group">
               <label htmlFor="location">Location (City, Country)</label>

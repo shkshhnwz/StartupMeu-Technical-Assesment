@@ -19,7 +19,7 @@ import {
 export const FounderInterestsPage = () => {
   const [interests, setInterests] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [filterTab, setFilterTab] = useState('all'); // all, pending, accepted, declined
+  const [filterTab, setFilterTab] = useState('all');
   const [searchQuery, setSearchQuery] = useState('');
   const [actionLoadingId, setActionLoadingId] = useState(null);
   const [toastMessage, setToastMessage] = useState('');
@@ -83,7 +83,6 @@ export const FounderInterestsPage = () => {
   return (
     <div className="dashboard-page" style={{ paddingBottom: '6rem' }}>
       <div className="dashboard-container" style={{ maxWidth: '1000px' }}>
-        {/* Breadcrumb Back Link */}
         <Link
           to="/founder/dashboard"
           className="btn-secondary-pill"
@@ -92,7 +91,6 @@ export const FounderInterestsPage = () => {
           <ArrowLeft size={16} /> Back to Dashboard
         </Link>
 
-        {/* Hero Header */}
         <div className="dashboard-hero-card">
           <div style={{ display: 'flex', alignItems: 'center', gap: '0.65rem' }}>
             <span className="role-badge badge-founder">Founder Workspace</span>
@@ -104,7 +102,6 @@ export const FounderInterestsPage = () => {
           </p>
         </div>
 
-        {/* Toast Alert */}
         {toastMessage && (
           <div
             style={{
@@ -125,7 +122,6 @@ export const FounderInterestsPage = () => {
           </div>
         )}
 
-        {/* Filters and Search Bar */}
         <div
           style={{
             display: 'flex',
@@ -139,7 +135,6 @@ export const FounderInterestsPage = () => {
             border: '1px solid var(--border-light)'
           }}
         >
-          {/* Status Tabs */}
           <div style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap' }}>
             <button
               onClick={() => setFilterTab('all')}
@@ -171,7 +166,6 @@ export const FounderInterestsPage = () => {
             </button>
           </div>
 
-          {/* Search Box */}
           <div style={{ position: 'relative', minWidth: '240px', flex: '1', maxWidth: '320px' }}>
             <Search
               size={16}
@@ -196,7 +190,6 @@ export const FounderInterestsPage = () => {
           </div>
         </div>
 
-        {/* Requests List */}
         {loading ? (
           <div className="loading-wrapper">
             <div className="spinner-clean"></div>
@@ -251,7 +244,6 @@ export const FounderInterestsPage = () => {
                       </div>
                     </div>
 
-                    {/* Actions / Status */}
                     <div>
                       {isPending ? (
                         <div style={{ display: 'flex', gap: '0.65rem' }}>
@@ -319,7 +311,6 @@ export const FounderInterestsPage = () => {
                     </div>
                   </div>
 
-                  {/* Message Note */}
                   {interest.message ? (
                     <div
                       style={{
@@ -343,7 +334,6 @@ export const FounderInterestsPage = () => {
                     </p>
                   )}
 
-                  {/* Metadata footer */}
                   <div
                     style={{
                       display: 'flex',

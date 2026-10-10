@@ -41,7 +41,6 @@ describe('Authorization & Role-Based Access Control', () => {
       expect(res.body.data.user.role).toBe('founder');
       expect(res.body.data.user.passwordHash).toBeUndefined();
 
-      // Check cookie header
       const cookies = res.headers['set-cookie'];
       expect(cookies).toBeDefined();
       expect(cookies[0]).toMatch(/token=/);
@@ -77,7 +76,7 @@ describe('Authorization & Role-Based Access Control', () => {
         .post('/api/auth/register')
         .send({
           name: 'Alice Duplicate',
-          email: 'ALICE@example.com', // Case insensitivity test
+          email: 'ALICE@example.com',
           password: 'Password123!',
           role: 'founder'
         });
@@ -94,7 +93,7 @@ describe('Authorization & Role-Based Access Control', () => {
           name: 'Hacker User',
           email: 'hacker@example.com',
           password: 'Password123!',
-          role: 'admin' // Not in ['founder', 'investor']
+          role: 'admin'
         });
 
       expect(res.status).toBe(400);

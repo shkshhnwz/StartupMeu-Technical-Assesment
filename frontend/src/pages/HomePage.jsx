@@ -8,27 +8,22 @@ export const HomePage = () => {
 
   return (
     <div className="home-page">
-      {/* Bonsai-inspired Hero Section */}
       <section className="hero-container">
         <div className="hero-left">
-          {/* Partnership Tag */}
           <div className="partnership-tag">
             <span>In partnership with</span>
             <span className="partnership-badge">StartupMeu</span>
           </div>
 
-          {/* Main Headline */}
           <h1 className="hero-heading">
             The discovery platform for founders & investors
           </h1>
 
-          {/* Subtitle */}
           <p className="hero-description">
             Designed to simplify opportunity publishing, delight investors, and accelerate growth.
             Create your profile or sign in today.
           </p>
 
-          {/* Action Buttons Row (Solid Black Pill + Outline Pill) */}
           <div className="hero-button-row">
             {isAuthenticated ? (
               <Link
@@ -49,14 +44,12 @@ export const HomePage = () => {
             )}
           </div>
 
-          {/* Social Proof Stars */}
           <div className="social-proof-row">
             <span className="stars-rating">★★★★★</span>
             <span className="reviews-count">1020+ Reviews</span>
           </div>
         </div>
 
-        {/* Right Product Screen Display */}
         <div className="hero-right">
           <div className="hero-image-wrapper">
             <img
@@ -68,7 +61,6 @@ export const HomePage = () => {
         </div>
       </section>
 
-      {/* Feature Split Cards */}
       <section className="features-section">
         <div className="section-container">
           <div className="section-header">
@@ -77,7 +69,6 @@ export const HomePage = () => {
           </div>
 
           <div className="features-grid">
-            {/* Founder Card */}
             <div className="feature-card">
               <div className="feature-icon-wrapper feature-founder-icon">
                 <Briefcase size={22} />
@@ -96,7 +87,6 @@ export const HomePage = () => {
               </Link>
             </div>
 
-            {/* Investor Card */}
             <div className="feature-card">
               <div className="feature-icon-wrapper feature-investor-icon">
                 <TrendingUp size={22} />

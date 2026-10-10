@@ -2,19 +2,13 @@ const jwt = require('jsonwebtoken');
 const User = require('./User.model');
 const { sendError } = require('../../utils/apiResponse');
 
-/**
- * Protect middleware: Ensures the user is authenticated via JWT in HTTP-only cookie or Authorization header.
- */
 const protect = async (req, res, next) => {
   try {
     let token;
 
-    // Check HTTP-only cookie first
     if (req.cookies && req.cookies.token) {
       token = req.cookies.token;
-    }
-    // Also support Bearer token in Authorization header for API testing
-    else if (req.headers.authorization && req.headers.authorization.startsWith('Bearer ')) {
+    } else if (req.headers.authorization && req.headers.authorization.startsWith('Bearer ')) {
       token = req.headers.authorization.split(' ')[1];
     }
 
@@ -22,10 +16,8 @@ const protect = async (req, res, next) => {
       return sendError(res, 401, 'UNAUTHORIZED', 'Authentication required. Please log in.');
     }
 
-    // Verify JWT
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
 
-    // Retrieve active user
     const user = await User.findById(decoded.id);
     if (!user) {
       return sendError(res, 401, 'UNAUTHORIZED', 'The account associated with this token no longer exists.');
@@ -41,10 +33,6 @@ const protect = async (req, res, next) => {
   }
 };
 
-/**
- * Role-based authorization middleware factory.
- * Enforces role check (e.g. authorizeRoles('founder'), authorizeRoles('investor'))
- */
 const authorizeRoles = (...roles) => {
   return (req, res, next) => {
     if (!req.user) {
@@ -64,9 +52,6 @@ const authorizeRoles = (...roles) => {
   };
 };
 
-/**
- * Optional Auth middleware: Populates req.user if token is present and valid, but doesn't block unauthenticated requests
- */
 const optionalAuth = async (req, res, next) => {
   try {
     let token;
@@ -83,9 +68,7 @@ const optionalAuth = async (req, res, next) => {
         req.user = user;
       }
     }
-  } catch (_) {
-    // Silently continue for public requests
-  }
+  } catch (_) {}
   next();
 };
 

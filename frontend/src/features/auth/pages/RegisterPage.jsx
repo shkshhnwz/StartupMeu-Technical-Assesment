@@ -108,7 +108,6 @@ export const RegisterPage = () => {
         )}
 
         <form onSubmit={handleSubmit} className="auth-form" noValidate>
-          {/* Account Role Selector */}
           <div className="form-group">
             <label>Select account type</label>
             <div className="role-choice-grid">
@@ -145,7 +144,6 @@ export const RegisterPage = () => {
             {fieldErrors.role && <span className="field-error-text">{fieldErrors.role}</span>}
           </div>
 
-          {/* Name */}
           <div className="form-group">
             <label htmlFor="reg-name">Full name</label>
             <div className="input-container">
@@ -165,7 +163,6 @@ export const RegisterPage = () => {
             {fieldErrors.name && <span className="field-error-text">{fieldErrors.name}</span>}
           </div>
 
-          {/* Email */}
           <div className="form-group">
             <label htmlFor="reg-email">Work email</label>
             <div className="input-container">
@@ -185,7 +182,6 @@ export const RegisterPage = () => {
             {fieldErrors.email && <span className="field-error-text">{fieldErrors.email}</span>}
           </div>
 
-          {/* Password Row */}
           <div className="form-row">
             <div className="form-group">
               <label htmlFor="reg-password">Password (8+ chars)</label>

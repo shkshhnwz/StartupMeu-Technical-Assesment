@@ -99,7 +99,6 @@ const validateCreateBusiness = (req, res, next) => {
     return sendError(res, 400, 'VALIDATION_ERROR', 'Please check your listing details', fields);
   }
 
-  // Normalize trimmed values
   req.body.businessName = businessName.trim();
   req.body.tagline = tagline.trim();
   req.body.description = description.trim();
@@ -213,7 +212,6 @@ const validateUpdateBusiness = (req, res, next) => {
     fields.status = 'Status must be draft or published';
   }
 
-  // Prevent client from mutating security/ownership fields
   delete req.body.owner;
   delete req.body.deletedAt;
   delete req.body._id;

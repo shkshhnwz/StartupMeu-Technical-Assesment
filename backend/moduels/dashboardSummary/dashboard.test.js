@@ -19,7 +19,6 @@ beforeAll(async () => {
   const uri = mongoServer.getUri();
   await mongoose.connect(uri);
 
-  // Register Founder
   const fRes = await request(app)
     .post('/api/auth/register')
     .send({
@@ -31,7 +30,6 @@ beforeAll(async () => {
   founderCookie = fRes.headers['set-cookie'];
   founderUser = fRes.body.data.user;
 
-  // Register Investor
   const invRes = await request(app)
     .post('/api/auth/register')
     .send({
@@ -83,7 +81,6 @@ beforeEach(async () => {
 describe('Feature 5: Dashboard Summary API', () => {
   describe('GET /api/dashboard/founder', () => {
     it('returns comprehensive metrics and recent inbound activity for authenticated founder', async () => {
-      // Create an inbound interest request from investor
       await Interest.create({
         business: publishedBiz._id,
         investor: investorUser._id,
@@ -129,7 +126,6 @@ describe('Feature 5: Dashboard Summary API', () => {
 
   describe('GET /api/dashboard/investor', () => {
     it('returns pipeline breakdown and recent submissions for authenticated investor', async () => {
-      // Investor sends interest
       await Interest.create({
         business: publishedBiz._id,
         investor: investorUser._id,
@@ -150,8 +146,6 @@ describe('Feature 5: Dashboard Summary API', () => {
       expect(metrics.acceptedCount).toBe(0);
       expect(recentInterests).toHaveLength(1);
       expect(recentInterests[0].business.businessName).toBe('FinNova Technologies');
-
-      // Privacy check: Founder email is concealed because pending
       expect(recentInterests[0].business.owner.email).toBeUndefined();
     });
 

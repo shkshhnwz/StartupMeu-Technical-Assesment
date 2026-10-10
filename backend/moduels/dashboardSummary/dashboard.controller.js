@@ -2,16 +2,10 @@ const Business = require('../founderListingManagement/Business.model');
 const Interest = require('../investorInterestWorkflow/Interest.model');
 const { sendSuccess, sendError } = require('../../utils/apiResponse');
 
-/**
- * @desc    Get founder dashboard summary metrics and recent activity
- * @route   GET /api/dashboard/founder
- * @access  Founder only
- */
 const getFounderDashboardSummary = async (req, res, next) => {
   try {
     const founderId = req.user._id;
 
-    // 1. Fetch businesses owned by this founder (excluding soft-deleted)
     const businesses = await Business.find({
       owner: founderId,
       deletedAt: null
@@ -23,7 +17,6 @@ const getFounderDashboardSummary = async (req, res, next) => {
 
     const businessIds = businesses.map((b) => b._id);
 
-    // 2. Fetch interest stats across founder's businesses
     const interests = await Interest.find({
       business: { $in: businessIds }
     }).select('status createdAt');
@@ -33,7 +26,6 @@ const getFounderDashboardSummary = async (req, res, next) => {
     const acceptedInterests = interests.filter((i) => i.status === 'accepted').length;
     const declinedInterests = interests.filter((i) => i.status === 'declined').length;
 
-    // 3. Fetch up to 5 most recent inbound interest requests
     const recentInterests = await Interest.find({
       business: { $in: businessIds }
     })
@@ -59,16 +51,10 @@ const getFounderDashboardSummary = async (req, res, next) => {
   }
 };
 
-/**
- * @desc    Get investor dashboard summary metrics and recent pipeline activity
- * @route   GET /api/dashboard/investor
- * @access  Investor only
- */
 const getInvestorDashboardSummary = async (req, res, next) => {
   try {
     const investorId = req.user._id;
 
-    // 1. Fetch all interests sent by this investor
     const interests = await Interest.find({
       investor: investorId
     }).select('status createdAt');
@@ -78,7 +64,6 @@ const getInvestorDashboardSummary = async (req, res, next) => {
     const acceptedCount = interests.filter((i) => i.status === 'accepted').length;
     const declinedCount = interests.filter((i) => i.status === 'declined').length;
 
-    // 2. Fetch up to 5 most recent sent interests
     const recentInterests = await Interest.find({
       investor: investorId
     })
@@ -93,7 +78,6 @@ const getInvestorDashboardSummary = async (req, res, next) => {
       .sort({ createdAt: -1 })
       .limit(5);
 
-    // Privacy rule: Only reveal founder contact email if status is accepted
     const sanitizedRecent = recentInterests.map((item) => {
       const obj = item.toObject();
       if (obj.business && obj.business.owner && obj.status !== 'accepted') {

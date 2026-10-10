@@ -4,18 +4,17 @@
   --font-main: 'Plus Jakarta Sans', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   --font-heading: 'Plus Jakarta Sans', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
 
-  /* Bonsai-inspired Palette: Warm minimal white, crisp deep black & Bonsai green */
-  --bg-page: #FAF9F6;           /* Warm soft white background */
-  --bg-white: #FFFFFF;          /* Pure white */
-  --bg-subtle: #F4F4F2;         /* Warm subtle grey for cards / hovers */
-  --bg-light-green: #E8F5E9;    /* Bonsai signature pastel green */
+  --bg-page: #FAF9F6;           
+  --bg-white: #FFFFFF;          
+  --bg-subtle: #F4F4F2;         
+  --bg-light-green: #E8F5E9;    
 
-  --text-primary: #111111;      /* Deep obsidian black */
-  --text-secondary: #4A4A4A;    /* Slate secondary text */
-  --text-muted: #737373;        /* Muted caption text */
-  --text-dim: #A3A3A3;          /* Dim grey */
+  --text-primary: #111111;      
+  --text-secondary: #4A4A4A;    
+  --text-muted: #737373;        
+  --text-dim: #A3A3A3;          
 
-  --brand-green: #00A35C;       /* Bonsai vibrant green */
+  --brand-green: #00A35C;       
   --brand-green-dark: #00874C;
   --brand-black: #111111;
   --brand-black-hover: #262626;
@@ -32,7 +31,6 @@
   --success-bg: #ECFDF5;
   --success-border: #A7F3D0;
 
-  /* Pill-based radius system like Bonsai */
   --radius-pill: 9999px;
   --radius-sm: 8px;
   --radius-md: 12px;
@@ -62,7 +60,6 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* App Shell */
 .app-shell {
   display: flex;
   flex-direction: column;
@@ -76,9 +73,6 @@ body {
   flex-direction: column;
 }
 
-/* ==========================================================================
-   NAVIGATION BAR (Bonsai Clean White Top Nav)
-   ========================================================================== */
 .navbar {
   position: sticky;
   top: 0;
@@ -173,7 +167,6 @@ body {
   opacity: 0.75;
 }
 
-/* User Menu in Navbar */
 .user-profile-menu {
   display: flex;
   align-items: center;
@@ -232,9 +225,6 @@ body {
   background-color: var(--danger-bg);
 }
 
-/* ==========================================================================
-   BUTTONS (Bonsai Pill-Shaped Buttons)
-   ========================================================================== */
 .btn-primary, .btn-primary-pill, .btn-hero-primary {
   background-color: var(--brand-black);
   color: #FFFFFF;
@@ -319,9 +309,6 @@ body {
   transform: none;
 }
 
-/* ==========================================================================
-   HOMEPAGE (Bonsai Style Hero & Sections)
-   ========================================================================== */
 .home-page {
   background-color: var(--bg-white);
   overflow-x: hidden;
@@ -427,7 +414,6 @@ body {
   object-fit: cover;
 }
 
-/* Feature Showcase Section */
 .features-section {
   background-color: var(--bg-page);
   border-top: 1px solid var(--border-light);
@@ -552,9 +538,6 @@ body {
   gap: 0.65rem;
 }
 
-/* ==========================================================================
-   AUTHENTICATION PAGES (Bonsai Clean Minimalist Form Cards)
-   ========================================================================== */
 .auth-page {
   background-color: var(--bg-page);
   flex: 1;
@@ -610,7 +593,6 @@ body {
   font-size: 0.95rem;
 }
 
-/* Demo Fast Fill Section */
 .demo-pill-section {
   background-color: var(--bg-page);
   border: 1px solid var(--border-light);
@@ -656,7 +638,6 @@ body {
   border-color: var(--text-primary);
 }
 
-/* Alert Error */
 .alert-error {
   display: flex;
   align-items: center;
@@ -671,7 +652,6 @@ body {
   margin-bottom: 1.25rem;
 }
 
-/* Form Groups & Inputs */
 .auth-form {
   display: flex;
   flex-direction: column;
@@ -754,7 +734,6 @@ body {
   gap: 1rem;
 }
 
-/* Role Selector (Dual-card toggle on Register) */
 .role-choice-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -816,9 +795,6 @@ body {
   text-underline-offset: 3px;
 }
 
-/* ==========================================================================
-   DASHBOARD PAGES (Clean, Airy Bonsai SaaS UI)
-   ========================================================================== */
 .dashboard-page {
   background-color: var(--bg-page);
   flex: 1;
@@ -911,7 +887,6 @@ body {
   margin-top: 0.25rem;
 }
 
-/* Role Live Testing Card */
 .role-test-box {
   background-color: var(--bg-white);
   border: 1px solid var(--border-light);
@@ -984,7 +959,6 @@ body {
   font-size: 0.85rem;
 }
 
-/* Empty State Card */
 .empty-placeholder-card {
   background-color: var(--bg-white);
   border: 2px dashed var(--border-medium);
@@ -1009,7 +983,6 @@ body {
   line-height: 1.6;
 }
 
-/* Loading & Spinners */
 .loading-wrapper {
   flex: 1;
   display: flex;
@@ -1043,7 +1016,6 @@ body {
   to { transform: rotate(360deg); }
 }
 
-/* Mobile Hamburger & Navigation Drawer */
 .mobile-hamburger-btn {
   display: none;
   background: none;
@@ -1131,7 +1103,6 @@ body {
   to { transform: translateY(0); opacity: 1; }
 }
 
-/* Responsive Rules */
 @media (max-width: 960px) {
   .hero-container {
     grid-template-columns: 1fr;
@@ -1208,7 +1179,6 @@ body {
   }
 }
 
-/* Mobile 375px Edge Tweaks */
 @media (max-width: 400px) {
   .navbar-container {
     padding: 0 0.85rem;

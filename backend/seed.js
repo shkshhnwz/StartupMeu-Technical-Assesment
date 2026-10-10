@@ -9,7 +9,6 @@ const seedData = async () => {
     await connectDB();
     console.log('[Seed] Connected to database. Seeding demo accounts and listings...');
 
-    // Clear existing test users with demo emails
     await User.deleteMany({
       email: { $in: ['founder@startupmeu.demo', 'investor@startupmeu.demo'] }
     });
@@ -32,10 +31,8 @@ const seedData = async () => {
       }
     ]);
 
-    // Clear old listings owned by demo founder
     await Business.deleteMany({ owner: founder._id });
 
-    // Seed listings for demo founder
     const demoListings = await Business.create([
       {
         owner: founder._id,
@@ -67,7 +64,6 @@ const seedData = async () => {
       }
     ]);
 
-    // Clear old interests involving demo investor or founder
     const Interest = require('./moduels/investorInterestWorkflow/Interest.model');
     await Interest.deleteMany({
       $or: [
@@ -76,7 +72,6 @@ const seedData = async () => {
       ]
     });
 
-    // Seed sample pending interest
     const demoInterest = await Interest.create({
       business: demoListings[0]._id,
       investor: investor._id,

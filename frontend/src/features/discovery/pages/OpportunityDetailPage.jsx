@@ -80,7 +80,6 @@ export const OpportunityDetailPage = () => {
   return (
     <div className="home-page" style={{ paddingBottom: '6rem' }}>
       <div className="section-container" style={{ paddingTop: '3rem', maxWidth: '960px' }}>
-        {/* Breadcrumb Navigation */}
         <Link
           to="/opportunities"
           className="btn-secondary-pill"
@@ -89,7 +88,6 @@ export const OpportunityDetailPage = () => {
           <ArrowLeft size={16} /> Back to All Opportunities
         </Link>
 
-        {/* Hero Listing Header Card */}
         <div className="dashboard-hero-card" style={{ marginBottom: '2rem' }}>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', flexWrap: 'wrap', gap: '1rem' }}>
             <div>
@@ -145,7 +143,6 @@ export const OpportunityDetailPage = () => {
           </div>
         </div>
 
-        {/* Highlights & Financials Row */}
         <div className="metrics-row" style={{ marginBottom: '2.5rem' }}>
           <div className="metric-box">
             <div className="metric-icon-bubble" style={{ backgroundColor: '#ECFDF5', color: '#00A35C' }}>
@@ -184,7 +181,6 @@ export const OpportunityDetailPage = () => {
           </div>
         </div>
 
-        {/* Detailed Business Overview Section */}
         <div className="feature-card" style={{ padding: '2.5rem', marginBottom: '2.5rem' }}>
           <h2 style={{ fontFamily: 'var(--font-heading)', fontSize: '1.6rem', fontWeight: 800, marginBottom: '1.25rem', color: '#111111' }}>
             About the Venture & Growth Thesis
@@ -194,7 +190,6 @@ export const OpportunityDetailPage = () => {
           </div>
         </div>
 
-        {/* Investor Call to Action Banner */}
         <div
           className="dashboard-hero-card"
           style={{
@@ -222,7 +217,6 @@ export const OpportunityDetailPage = () => {
           </button>
         </div>
 
-        {/* Express Interest Modal */}
         <ExpressInterestModal
           business={business}
           isOpen={isModalOpen}

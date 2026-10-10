@@ -2,16 +2,10 @@ const Interest = require('./Interest.model');
 const Business = require('../founderListingManagement/Business.model');
 const { sendSuccess, sendError } = require('../../utils/apiResponse');
 
-/**
- * @desc    Express interest in a published business opportunity
- * @route   POST /api/interests
- * @access  Investor only
- */
 const submitInterest = async (req, res, next) => {
   try {
     const { businessId, message } = req.body;
 
-    // Verify the business exists, is published, and not soft-deleted
     const business = await Business.findOne({
       _id: businessId,
       status: 'published',
@@ -27,7 +21,6 @@ const submitInterest = async (req, res, next) => {
       );
     }
 
-    // Check for duplicate submission (PRD: compound unique index check)
     const existingInterest = await Interest.findOne({
       business: businessId,
       investor: req.user._id
@@ -43,7 +36,6 @@ const submitInterest = async (req, res, next) => {
       );
     }
 
-    // Create pending interest request
     const interest = await Interest.create({
       business: businessId,
       investor: req.user._id,
@@ -67,11 +59,6 @@ const submitInterest = async (req, res, next) => {
   }
 };
 
-/**
- * @desc    Get sent interests submitted by the authenticated investor
- * @route   GET /api/interests/sent
- * @access  Investor only
- */
 const getSentInterests = async (req, res, next) => {
   try {
     const interests = await Interest.find({
@@ -87,7 +74,6 @@ const getSentInterests = async (req, res, next) => {
       })
       .sort({ createdAt: -1 });
 
-    // Privacy rule: Only reveal founder contact email if request was ACCEPTED
     const sanitizedInterests = interests.map((item) => {
       const obj = item.toObject();
       if (obj.business && obj.business.owner && obj.status !== 'accepted') {
@@ -105,14 +91,8 @@ const getSentInterests = async (req, res, next) => {
   }
 };
 
-/**
- * @desc    Get incoming interest requests for businesses owned by founder
- * @route   GET /api/interests/received
- * @access  Founder only
- */
 const getReceivedInterests = async (req, res, next) => {
   try {
-    // Find all businesses owned by founder
     const myBusinesses = await Business.find({
       owner: req.user._id,
       deletedAt: null
@@ -136,11 +116,6 @@ const getReceivedInterests = async (req, res, next) => {
   }
 };
 
-/**
- * @desc    Accept or decline a pending interest request
- * @route   PATCH /api/interests/:id/status
- * @access  Owner Founder only
- */
 const updateInterestStatus = async (req, res, next) => {
   try {
     const { status } = req.body;
@@ -151,7 +126,6 @@ const updateInterestStatus = async (req, res, next) => {
       return sendError(res, 404, 'NOT_FOUND', 'Interest request not found');
     }
 
-    // Verify that the logged-in founder owns the business associated with this interest
     if (
       !interest.business ||
       interest.business.owner.toString() !== req.user._id.toString()
@@ -164,7 +138,6 @@ const updateInterestStatus = async (req, res, next) => {
       );
     }
 
-    // PRD rule: Only 'pending' requests may transition to 'accepted' or 'declined'
     if (interest.status !== 'pending') {
       return sendError(
         res,
@@ -174,7 +147,6 @@ const updateInterestStatus = async (req, res, next) => {
       );
     }
 
-    // Apply update
     interest.status = status;
     interest.reviewedAt = new Date();
     await interest.save();

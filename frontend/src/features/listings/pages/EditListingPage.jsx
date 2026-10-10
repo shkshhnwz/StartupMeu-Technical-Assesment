@@ -189,7 +189,6 @@ export const EditListingPage = () => {
         )}
 
         <form onSubmit={handleSubmit} className="auth-card" style={{ maxWidth: '100%' }} noValidate>
-          {/* Status Selection Pill Toggle */}
           <div className="form-group" style={{ marginBottom: '0.75rem' }}>
             <label>Listing Status</label>
             <div className="demo-pill-buttons" style={{ gridTemplateColumns: '1fr 1fr', maxWidth: '380px' }}>
@@ -220,7 +219,6 @@ export const EditListingPage = () => {
             </div>
           </div>
 
-          {/* Business Name */}
           <div className="form-group">
             <label htmlFor="businessName">Business Name</label>
             <div className="input-container">
@@ -238,7 +236,6 @@ export const EditListingPage = () => {
             {fieldErrors.businessName && <span className="field-error-text">{fieldErrors.businessName}</span>}
           </div>
 
-          {/* Tagline */}
           <div className="form-group">
             <div style={{ display: 'flex', justifyContent: 'space-between' }}>
               <label htmlFor="tagline">Tagline</label>
@@ -260,7 +257,6 @@ export const EditListingPage = () => {
             {fieldErrors.tagline && <span className="field-error-text">{fieldErrors.tagline}</span>}
           </div>
 
-          {/* Description */}
           <div className="form-group">
             <div style={{ display: 'flex', justifyContent: 'space-between' }}>
               <label htmlFor="description">Business Description</label>
@@ -288,7 +284,6 @@ export const EditListingPage = () => {
             {fieldErrors.description && <span className="field-error-text">{fieldErrors.description}</span>}
           </div>
 
-          {/* Row: Industry & Stage */}
           <div className="form-row">
             <div className="form-group">
               <label htmlFor="industry">Industry</label>
@@ -341,7 +336,6 @@ export const EditListingPage = () => {
             </div>
           </div>
 
-          {/* Row: Funding Required & Currency */}
           <div className="form-row">
             <div className="form-group">
               <label htmlFor="fundingRequired">Funding Required</label>
@@ -387,7 +381,6 @@ export const EditListingPage = () => {
             </div>
           </div>
 
-          {/* Row: Location & Website */}
           <div className="form-row">
             <div className="form-group">
               <label htmlFor="location">Location</label>

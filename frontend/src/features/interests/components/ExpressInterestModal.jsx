@@ -67,7 +67,6 @@ export const ExpressInterestModal = ({ business, isOpen, onClose, onSuccess }) =
         }}
         onClick={(e) => e.stopPropagation()}
       >
-        {/* Close Button */}
         <button
           onClick={handleClose}
           style={{
@@ -123,7 +122,6 @@ export const ExpressInterestModal = ({ business, isOpen, onClose, onSuccess }) =
           </div>
         ) : (
           <div>
-            {/* Header */}
             <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '0.5rem' }}>
               <span className="role-badge badge-investor" style={{ fontSize: '0.75rem' }}>
                 Investor Workflow
