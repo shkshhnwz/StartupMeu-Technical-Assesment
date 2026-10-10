@@ -1,3 +1,4 @@
+require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
 const helmet = require('helmet');
@@ -17,10 +18,9 @@ const app = express();
 app.use(helmet());
 
 // CORS configuration for cookies & credentials
-const allowedOrigins = [
-  process.env.CLIENT_URL || 'http://localhost:5173',
-  'http://localhost:3000'
-];
+const allowedOrigins = process.env.CLIENT_URL
+  ? process.env.CLIENT_URL.split(',').map((origin) => origin.trim())
+  : [];
 
 app.use(
   cors({
@@ -50,7 +50,7 @@ app.use(cookieParser(process.env.COOKIE_SECRET));
 app.get('/api/health', (req, res) => {
   return sendSuccess(res, 200, 'StartupMeu Connect API is healthy', {
     timestamp: new Date().toISOString(),
-    environment: process.env.NODE_ENV || 'development'
+    environment: process.env.NODE_ENV
   });
 });
 

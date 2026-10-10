@@ -8,8 +8,8 @@ const { sendSuccess, sendError } = require('../../utils/apiResponse');
 const signToken = (id, role) => {
   return jwt.sign(
     { id, role },
-    process.env.JWT_SECRET || 'super_secret_jwt_key_startupmeu_dev',
-    { expiresIn: process.env.JWT_EXPIRES_IN || '7d' }
+    process.env.JWT_SECRET,
+    { expiresIn: process.env.JWT_EXPIRES_IN }
   );
 };
 
