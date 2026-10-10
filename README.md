@@ -98,6 +98,8 @@ For a functional review, test the following flows:
 - Investor interest submission, duplicate prevention, and request status tracking
 - Founder acceptance/decline actions and role restrictions
 - Responsive navigation and forms on mobile and desktop
+
+  
 Author
 Shahnawaz Shaikh
 Developed for the StartupMeu MERN Stack internship technical assessment.
