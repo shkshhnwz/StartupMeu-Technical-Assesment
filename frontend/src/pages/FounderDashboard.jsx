@@ -200,9 +200,11 @@ export const FounderDashboard = () => {
                 Review incoming requests from accredited investors. Accepting unlocks your direct contact information.
               </p>
             </div>
-            <span style={{ fontSize: '0.9rem', color: '#737373' }}>
-              {receivedInterests.length} request{receivedInterests.length === 1 ? '' : 's'}
-            </span>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+              <Link to="/founder/interests" className="btn-secondary-pill" style={{ textDecoration: 'none', fontSize: '0.875rem' }}>
+                <Inbox size={15} /> Manage All Inquiries ({receivedInterests.length})
+              </Link>
+            </div>
           </div>
 
           {loadingInterests ? (
