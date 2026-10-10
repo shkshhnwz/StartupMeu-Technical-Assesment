@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../../auth/context/AuthContext';
 import { discoveryService } from '../services/discoveryService';
+import { ExpressInterestModal } from '../../interests/components/ExpressInterestModal';
 import { ArrowLeft, MapPin, DollarSign, Globe, Building, User, CheckCircle2, TrendingUp, AlertCircle, Sparkles } from 'lucide-react';
 
 export const OpportunityDetailPage = () => {
@@ -12,6 +13,7 @@ export const OpportunityDetailPage = () => {
   const [business, setBusiness] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   useEffect(() => {
     let isMounted = true;
@@ -45,8 +47,7 @@ export const OpportunityDetailPage = () => {
     } else if (!isInvestor) {
       alert('Only registered investors can express interest in funding opportunities.');
     } else {
-      // Future Feature 4 Modal trigger or prompt
-      alert(`Interest workflow ready for Feature 4! You will be able to express interest in ${business.businessName}.`);
+      setIsModalOpen(true);
     }
   };
 
@@ -220,6 +221,13 @@ export const OpportunityDetailPage = () => {
             Express Interest Now
           </button>
         </div>
+
+        {/* Express Interest Modal */}
+        <ExpressInterestModal
+          business={business}
+          isOpen={isModalOpen}
+          onClose={() => setIsModalOpen(false)}
+        />
       </div>
     </div>
   );
