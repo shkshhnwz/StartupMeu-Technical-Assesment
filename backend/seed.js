@@ -67,10 +67,28 @@ const seedData = async () => {
       }
     ]);
 
+    // Clear old interests involving demo investor or founder
+    const Interest = require('./moduels/investorInterestWorkflow/Interest.model');
+    await Interest.deleteMany({
+      $or: [
+        { investor: investor._id },
+        { business: { $in: demoListings.map((b) => b._id) } }
+      ]
+    });
+
+    // Seed sample pending interest
+    const demoInterest = await Interest.create({
+      business: demoListings[0]._id,
+      investor: investor._id,
+      message: 'Apex Capital focuses on B2B fintech & enterprise cash workflows. We are impressed by FinNova’s ARR growth and would like to review the pitch deck.',
+      status: 'pending'
+    });
+
     console.log('[Seed] Demo accounts & listings successfully created:');
     console.log(` - Founder: ${founder.email} (Password: Founder123!)`);
     console.log(` - Investor: ${investor.email} (Password: Investor123!)`);
-    console.log(` - Listings Created: ${demoListings.length} (1 Published, 1 Draft)\n`);
+    console.log(` - Listings Created: ${demoListings.length} (1 Published, 1 Draft)`);
+    console.log(` - Sample Interest Created: ${demoInterest.status} from ${investor.name}\n`);
 
     await mongoose.connection.close();
     process.exit(0);

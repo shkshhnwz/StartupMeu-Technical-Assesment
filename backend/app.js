@@ -7,6 +7,8 @@ const errorHandler = require('./middleware/errorHandler');
 const { authRoutes } = require('./moduels/Authorization');
 const { businessRoutes } = require('./moduels/founderListingManagement');
 const { discoveryRoutes } = require('./moduels/OpportunityDiscovery');
+const { interestRoutes } = require('./moduels/investorInterestWorkflow');
+const { dashboardRoutes } = require('./moduels/dashboardSummary');
 const { sendSuccess, sendError } = require('./utils/apiResponse');
 
 const app = express();
@@ -55,6 +57,8 @@ app.get('/api/health', (req, res) => {
 app.use('/api/auth', authRoutes);
 app.use('/api/businesses', businessRoutes);
 app.use('/api/opportunities', discoveryRoutes);
+app.use('/api/interests', interestRoutes);
+app.use('/api/dashboard', dashboardRoutes);
 
 app.use('*', (req, res) => {
   return sendError(res, 404, 'NOT_FOUND', `Route ${req.originalUrl} not found`);

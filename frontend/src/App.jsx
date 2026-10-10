@@ -11,6 +11,7 @@ import { NewListingPage } from './features/listings/pages/NewListingPage';
 import { EditListingPage } from './features/listings/pages/EditListingPage';
 import { OpportunitiesPage } from './features/discovery/pages/OpportunitiesPage';
 import { OpportunityDetailPage } from './features/discovery/pages/OpportunityDetailPage';
+import { FounderInterestsPage } from './features/interests/pages/FounderInterestsPage';
 import { UnauthorizedPage } from './pages/UnauthorizedPage';
 import { NotFoundPage } from './pages/NotFoundPage';
 import { ProtectedRoute } from './features/auth/components/ProtectedRoute';
@@ -53,6 +54,14 @@ function App() {
                 element={
                   <ProtectedRoute allowedRoles={['founder']}>
                     <EditListingPage />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="/founder/interests"
+                element={
+                  <ProtectedRoute allowedRoles={['founder']}>
+                    <FounderInterestsPage />
                   </ProtectedRoute>
                 }
               />
