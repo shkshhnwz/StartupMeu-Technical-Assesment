@@ -96,9 +96,3 @@ For a functional review, test the following flows:
 Author
 Shahnawaz Shaikh
 Developed for the StartupMeu MERN Stack internship technical assessment.
-
-⋮⋮⋮⋮
-⋮⋮⋮⋮
-
-
-⋮⋮
